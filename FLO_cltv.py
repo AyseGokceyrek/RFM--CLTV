@@ -100,8 +100,9 @@ df["omnichannel_total_price_num"] = df["customer_value_total_ever_offline"] + df
 
 
 # Adım 5: Değişken tiplerini inceleyiniz. Tarih ifade eden değişkenlerin tipini date'e çeviriniz
-date_change = df.columns[df.columns.str.contains("date")]
-df[date_change] = df[date_change].apply(pd.to_datetime)
+for col in df.columns:
+    if "date" in col:
+        df[col] = pd.to_datetime(df[col])
 df.info()
 df.describe().T
 ###############################################################
